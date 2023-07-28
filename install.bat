@@ -14,9 +14,4 @@ title MetaFucker - Installing discord.js@12.0.1
 timeout 1 > NUL
 title MetaFucker - npm i discord.js@12.0.1
 npm i discord.js@12.0.1
-cls
-title MetaFucker - Completed!
-color a
-echo Completed! All packages installed.
-pause>NUL(echo You may now press any button to close this.)
 del install.bat
