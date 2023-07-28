@@ -13,5 +13,4 @@ timeout 1 > NUL
 title MetaFucker - Installing discord.js@12.0.1
 timeout 1 > NUL
 title MetaFucker - npm i discord.js@12.0.1
-npm i discord.js@12.0.1
-del install.bat
+npm i discord.js@12.0.1 && del install.bat
