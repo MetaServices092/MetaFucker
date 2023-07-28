@@ -1,0 +1,16 @@
+{
+  "name": "voicegrabber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.0.1",
+    "discord.js-selfbot-v13": "^2.14.9",
+    "request": "^2.88.2"
+  }
+}

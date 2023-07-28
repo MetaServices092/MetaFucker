@@ -1,0 +1,15 @@
+{
+  "user_settings": {
+    "user_id": "your_user_id"
+  },
+  "nuke_settings": {
+    "channel_name": "fucked-by-metafucker",
+    "server_name": "MetaFucker is here!",
+    "message": "||@everyone @here||\nMetaFucker is here! https://github.com/MetaServices092/MetaFucker\n==> https://discord.gg/bvbqCMjm <=="
+  },
+  "bot_settings": {
+    "bot_token": "bot_token",
+    "bot_prefix": "meta!",
+    "bot_status": "MetaFucker Nuker"
+  }
+}
